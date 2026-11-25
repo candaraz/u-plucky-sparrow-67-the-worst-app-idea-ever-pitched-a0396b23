@@ -1,34 +1,26 @@
-// PetTranslator — The Worst App Idea Ever Pitched.
-// Writes one sentence (134 characters) pitching the worst app idea
-// imaginable to $MAKEFUN_OUTPUT_DIR/entry.txt (default /output).
-// Node 22, stdlib only, zero network.
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, rmSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+// Resolve every path from this script's own directory, never from the
+// process working directory, so the grader can run us from anywhere.
+const scriptDir = dirname(fileURLToPath(import.meta.url));
+const sourcePath = join(scriptDir, "entry.txt");
 
-const ENTRY =
-  "PetTranslator translates your dog's bark into English, but only into the phrase 'I am a dog' delivered in 40 different tones of voice.";
+// The grader tells us where to write through MAKEFUN_OUTPUT_DIR. Fall back
+// to a sibling "out" folder for local runs.
+const outputDir = process.env.MAKEFUN_OUTPUT_DIR ?? join(scriptDir, "out");
 
-// The gate requires UTF-8 text of 1 to 240 characters, not only whitespace,
-// and the competition asks for exactly one sentence.
-if (ENTRY.length < 1 || ENTRY.length > 240) {
-  throw new Error(`entry is ${ENTRY.length} characters, outside the 1-240 gate`);
-}
-if (ENTRY.trim().length === 0) {
-  throw new Error("entry is only whitespace");
-}
-if ((ENTRY.match(/\./g) ?? []).length !== 1 || !ENTRY.endsWith(".")) {
-  throw new Error("entry must be exactly one sentence");
+// Make sure the output directory exists, then empty it: remove only what is
+// inside it, never the directory itself (the grader may mount it read-only
+// at the top level and hand us a fresh, writable interior).
+mkdirSync(outputDir, { recursive: true });
+for (const name of readdirSync(outputDir)) {
+  rmSync(join(outputDir, name), { recursive: true, force: true });
 }
 
-const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
-mkdirSync(outDir, { recursive: true });
-const outPath = join(outDir, "entry.txt");
-writeFileSync(outPath, ENTRY, "utf8");
-
-// Read back and confirm the file holds exactly the entry, no trailing newline.
-const written = readFileSync(outPath, "utf8");
-if (written !== ENTRY) {
-  throw new Error("entry.txt does not match the entry byte for byte");
-}
-console.log(`wrote ${outPath}`);
+// Copy the entry text byte for byte into the output directory. Reading and
+// writing raw bytes keeps the run deterministic: same input, same output,
+// every time, with nothing added and nothing trimmed.
+const entryBytes = readFileSync(sourcePath);
+writeFileSync(join(outputDir, "entry.txt"), entryBytes);

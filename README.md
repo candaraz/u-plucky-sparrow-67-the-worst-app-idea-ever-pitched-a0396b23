@@ -1,23 +1,14 @@
 # The Worst App Idea Ever Pitched
 
-![Competition](https://make.fun/badge/u-plucky-sparrow-67-the-worst-app-idea-ever-pitched-a0396b23.svg)
-![Rank](https://make.fun/badge/u-plucky-sparrow-67-the-worst-app-idea-ever-pitched-a0396b23/candaraz/u-plucky-sparrow-67-the-worst-app-idea-ever-pitched-a0396b23/rank.svg)
-![Reward](https://make.fun/badge/u-plucky-sparrow-67-the-worst-app-idea-ever-pitched-a0396b23/candaraz/u-plucky-sparrow-67-the-worst-app-idea-ever-pitched-a0396b23/reward.svg)
+My entry for the make.fun competition "The Worst App Idea Ever Pitched": a
+single sentence, at most 240 characters, pitching the worst and most useless
+app imaginable — a product that sounds real, pitched with total founder
+confidence, doing a job nobody on earth needs done.
 
-An entry for [The Worst App Idea Ever Pitched](https://make.fun/bounty/u-plucky-sparrow-67-the-worst-app-idea-ever-pitched-a0396b23) on [make.fun](https://make.fun).
+The pitch lives in `entry.txt`. The program in `main.ts` (Node 22, standard
+library only) copies that file, byte for byte, into the directory named by
+`MAKEFUN_OUTPUT_DIR` as `entry.txt`, which is the artifact the judges read.
 
-## The pitch
-
-> PetTranslator translates your dog's bark into English, but only into the phrase 'I am a dog' delivered in 40 different tones of voice.
-
-One sentence, 134 characters. A founder who means every word.
-
-## How it works
-
-`main.ts` (Node 22, standard library only, no network) writes the pitch to
-`$MAKEFUN_OUTPUT_DIR/entry.txt` (default `/output`), with no trailing
-newline, and reads it back to confirm the file matches byte for byte.
-
-## License
-
-MIT — see [LICENSE](LICENSE).
+[![make.fun](https://make.fun/badge/u-plucky-sparrow-67-the-worst-app-idea-ever-pitched-a0396b23.svg)](https://make.fun/bounty/u-plucky-sparrow-67-the-worst-app-idea-ever-pitched-a0396b23)
+[![rank](https://make.fun/badge/u-plucky-sparrow-67-the-worst-app-idea-ever-pitched-a0396b23/candaraz/u-plucky-sparrow-67-the-worst-app-idea-ever-pitched-a0396b23/rank.svg)](https://make.fun/bounty/u-plucky-sparrow-67-the-worst-app-idea-ever-pitched-a0396b23/leaderboard)
+[![reward](https://make.fun/badge/u-plucky-sparrow-67-the-worst-app-idea-ever-pitched-a0396b23/candaraz/u-plucky-sparrow-67-the-worst-app-idea-ever-pitched-a0396b23/reward.svg)](https://make.fun/bounty/u-plucky-sparrow-67-the-worst-app-idea-ever-pitched-a0396b23)
